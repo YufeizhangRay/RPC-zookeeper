@@ -18,6 +18,7 @@ public class RpcClientProxy {
      * @param <T>
      * @return
      */
+    @SuppressWarnings("unchecked")	
     public <T> T clientProxy(final Class<T> interfaceCls,String version){
         //使用到了动态代理。
         return (T)Proxy.newProxyInstance(interfaceCls.getClassLoader(),
