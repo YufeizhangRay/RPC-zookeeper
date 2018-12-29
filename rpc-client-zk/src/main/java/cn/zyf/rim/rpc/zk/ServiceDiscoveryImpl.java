@@ -17,12 +17,9 @@ public class ServiceDiscoveryImpl implements IServiceDiscovery {
 
 	List<String> repos=new ArrayList<>();
 
-    private String address;
-
     private CuratorFramework curatorFramework;
 
     public ServiceDiscoveryImpl(String address) {
-        this.address = address;
 
         curatorFramework=CuratorFrameworkFactory.builder().
                 connectString(address).
@@ -62,7 +59,7 @@ public class ServiceDiscoveryImpl implements IServiceDiscovery {
         };
         childrenCache.getListenable().addListener(pathChildrenCacheListener);
         try {
-            childrenCache.start();
+            childrenCache.close();
         } catch (Exception e) {
            throw new RuntimeException("注册PatchChild Watcher 异常"+e);
         }
